@@ -1,0 +1,13 @@
+---
+- name: Template config file
+  template:
+    src: "filebeat.yml.j2"
+    dest: "/etc/filebeat/filebeat.yml"
+    mode: "644"
+    owner: 0
+    group: 0
+  notify: restart filebeat
+  tags:
+  - aspects_filebeat
+  - aspects_filebeat_config
+  - aspects_filebeat_configure

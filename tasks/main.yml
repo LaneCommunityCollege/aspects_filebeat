@@ -1,0 +1,16 @@
+---
+# tasks file for aspects_filebeat
+- include: "installDebian.yml"
+  when: ansible_os_family == "Debian" and aspects_filebeat_install
+  tags:
+  - aspects_filebeat
+  - aspects_filebeat_install
+  - aspects_filebeat_install_Debian
+
+- include: "configureDebian.yml"
+  when: ansible_os_family == "Debian" and aspects_filebeat_enabled
+  tags:
+  - aspects_filebeat
+  - aspects_filebeat_config
+  - aspects_filebeat_configure
+  - aspects_filebeat_configure_Debian

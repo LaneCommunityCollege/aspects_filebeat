@@ -1,0 +1,49 @@
+---
+- name: Install python-apt for use with ansible apt modules.
+  apt:
+    pkg: python-apt
+    state: latest
+    update_cache: "yes"
+    cache_valid_time: "86400"
+  tags:
+  - aspects_filebeat
+  - aspects_filebeat_install
+
+- name: Check for repository
+  stat:
+    path: "{{ aspects_filebeat_repository.Debian.path }}"
+  register: repostate
+  tags:
+  - aspects_filebeat
+  - aspects_filebeat_install
+
+- name: Add gpg key
+  when: repostate.stat is defined and repostate.stat.exists == false
+  apt_key:
+    url: "{{ aspects_filebeat_repository.Debian.key_url }}"
+  tags:
+  - aspects_filebeat
+  - aspects_filebeat_install
+
+- name: Add repo file
+  when: repostate.stat is defined and repostate.stat.exists == false
+  lineinfile:
+    state: present
+    dest: "{{ aspects_filebeat_repository.Debian.path }}"
+    owner: 0
+    group: 0
+    create: yes
+    line: "{{ aspects_filebeat_repository.Debian.value }}"
+  tags:
+  - aspects_filebeat
+  - aspects_filebeat_install
+
+- name: Install filebeat
+  when: repostate.stat is defined and repostate.stat.exists == true
+  apt:
+    pkg: "filebeat"
+    state: "present"
+    update_cache: "yes"
+  tags:
+  - aspects_filebeat
+  - aspects_filebeat_install

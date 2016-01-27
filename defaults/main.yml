@@ -1,0 +1,39 @@
+---
+# defaults file for aspects_filebeat
+aspects_filebeat_enabled: False
+aspects_use_repository: True
+aspects_filebeat_install: False
+aspects_filebeat_repository:
+  Debian:
+    value: "deb https://packages.elastic.co/beats/apt stable main"
+    path: "/etc/apt/sources.list.d/beats.list"
+    key_url: "https://packages.elasticsearch.org/GPG-KEY-elasticsearch"
+  RedHat:
+    value: |
+      [beats]
+      name=Elastic Beats Repository
+      baseurl=https://packages.elastic.co/beats/yum/el/$basearch
+      enabled=1
+      gpgkey=https://packages.elastic.co/GPG-KEY-elasticsearch
+      gpgcheck=1
+    path: "/etc/yum.repos.d/beats.repo"
+    key_url: "https://packages.elastic.co/GPG-KEY-elasticsearch"
+
+aspects_filebeat_outputs: {}
+#  example: |
+#    enabled: true
+#    hosts: ["http://example.tld:5043"]
+#    tls:
+#      certificate: /path/to/filebeat.crt
+#      certificate_key: /path/to/filebeat.key
+#      certificate_authorities:
+#        - /path/to/filebeatCA.crt
+#    timeout: 15
+
+aspects_filebeat_prospectors: {}
+#  example: |
+#    - paths:
+#       - "/var/log/*.log"
+#      document_type: syslog
+#      fields:
+#        service: test01
