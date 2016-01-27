@@ -4,7 +4,6 @@
     pkg: python-apt
     state: latest
     update_cache: "yes"
-    cache_valid_time: "86400"
   tags:
   - aspects_filebeat
   - aspects_filebeat_install
@@ -18,7 +17,7 @@
   - aspects_filebeat_install
 
 - name: Add gpg key
-  when: repostate.stat is defined and repostate.stat.exists == false
+  when: repostate.stat is defined and repostate.stat.exists != True
   apt_key:
     url: "{{ aspects_filebeat_repository.Debian.key_url }}"
   tags:
@@ -26,7 +25,7 @@
   - aspects_filebeat_install
 
 - name: Add repo file
-  when: repostate.stat is defined and repostate.stat.exists == false
+  when: repostate.stat is defined and repostate.stat.exists != True
   lineinfile:
     state: present
     dest: "{{ aspects_filebeat_repository.Debian.path }}"
@@ -39,7 +38,7 @@
   - aspects_filebeat_install
 
 - name: Install filebeat
-  when: repostate.stat is defined and repostate.stat.exists == true
+  when: repostate.stat is defined and repostate.stat.exists == True
   apt:
     pkg: "filebeat"
     state: "present"
