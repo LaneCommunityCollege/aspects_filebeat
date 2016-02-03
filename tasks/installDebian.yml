@@ -38,7 +38,6 @@
   - aspects_filebeat_install
 
 - name: Install filebeat
-  when: repostate.stat is defined and repostate.stat.exists == True
   apt:
     pkg: "filebeat"
     state: "present"
