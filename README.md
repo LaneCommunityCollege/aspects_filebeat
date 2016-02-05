@@ -18,7 +18,7 @@ Remember that indenting is very important. So, make sure your blocks of text in 
 * aspects_filebeat_enabled
   * True or False. If True, actually use this role. If False, skip everything in this role.
   * Default: False
-* aspects_use_repository
+* aspects_filebeat_use_repository
   * True or False. If True, add the Beats package repository. If False, use the tar.gz file.
   * Default: True
 * aspects_filebeat_install
