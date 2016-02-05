@@ -1,0 +1,39 @@
+---
+- name: Check for repository
+  stat:
+    path: "{{ aspects_filebeat_repository.RedHat.path }}"
+  register: repostate
+  tags:
+  - aspects_filebeat
+  - aspects_filebeat_install
+
+- name: Add gpg key
+  when: repostate.stat is defined and repostate.stat.exists != True
+  rpm_key: 
+    state: present
+    key: "{{ aspects_filebeat_repository.RedHat.key_url }}"
+  tags:
+  - aspects_filebeat
+  - aspects_filebeat_install
+
+- name: Add repo file
+  when: repostate.stat is defined and repostate.stat.exists != True
+  lineinfile:
+    state: present
+    dest: "{{ aspects_filebeat_repository.RedHat.path }}"
+    owner: 0
+    group: 0
+    create: yes
+    line: "{{ aspects_filebeat_repository.RedHat.value }}"
+  tags:
+  - aspects_filebeat
+  - aspects_filebeat_install
+
+- name: Install filebeat
+  yum:
+    name: "filebeat"
+    state: "present"
+    update_cache: "yes"
+  tags:
+  - aspects_filebeat
+  - aspects_filebeat_install

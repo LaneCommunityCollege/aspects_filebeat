@@ -14,3 +14,19 @@
   - aspects_filebeat_config
   - aspects_filebeat_configure
   - aspects_filebeat_configure_Debian
+
+
+- include: "installRedHat.yml"
+  when: ansible_os_family == "RedHat" and aspects_filebeat_install
+  tags:
+  - aspects_filebeat
+  - aspects_filebeat_install
+  - aspects_filebeat_install_RedHat
+
+- include: "configureRedHat.yml"
+  when: ansible_os_family == "RedHat" and aspects_filebeat_enabled
+  tags:
+  - aspects_filebeat
+  - aspects_filebeat_config
+  - aspects_filebeat_configure
+  - aspects_filebeat_configure_RedHat
