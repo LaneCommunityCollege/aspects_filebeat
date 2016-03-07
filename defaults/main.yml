@@ -37,3 +37,5 @@ aspects_filebeat_prospectors: {}
 #      document_type: syslog
 #      fields:
 #        service: test01
+aspects_filebeat_shipper:
+  tags: "['filebeat']"
