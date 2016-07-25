@@ -1,7 +1,6 @@
 ---
 # defaults file for aspects_filebeat
 aspects_filebeat_enabled: False
-aspects_use_repository: True
 aspects_filebeat_install: False
 aspects_filebeat_repository:
   Debian:
