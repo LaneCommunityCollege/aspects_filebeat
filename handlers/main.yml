@@ -1,19 +1,28 @@
 ---
 # handlers file for aspects_filebeat
 - name: restart filebeat
-  service: name=filebeat state=restarted enabled=yes
+  service:
+    name: filebeat
+    state: restarted
+    enabled: yes
   tags:
   - aspects_filebeat
   - aspects_filebeat_handlers
 
 - name: start filebeat
-  service: name=filebeat state=started enabled=yes
+  service:
+    name: filebeat
+    state: started
+    enabled: yes
   tags:
   - aspects_filebeat
   - aspects_filebeat_handlers
 
 - name: stop filebeat
-  service: name=filebeat state=stopped enabled=yes
+  service:
+    name: filebeat
+    state: stopped
+    enabled: yes
   tags:
   - aspects_filebeat
   - aspects_filebeat_handlers

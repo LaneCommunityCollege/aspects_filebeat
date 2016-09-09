@@ -11,8 +11,9 @@ galaxy_info:
   #   - 6.5
   - name: Ubuntu
     versions:
-  #  - precise
+    - precise
     - trusty
+    - xenial
   #- name: SLES
   #  versions:
   #  - all
